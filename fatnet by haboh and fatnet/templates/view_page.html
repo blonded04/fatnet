@@ -2,9 +2,30 @@
 
 {% block content %}
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
-        <a href="/message/{{current_user_id}}">
+        <h1>
+            <img width="50" src="{{user_photo}}" style="border-radius: 200px;">
+        {{user_name}}
+    <!--</div>-->
+    <!--<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">-->
+        <a style="margin-left: 20px;" href="/message/{{current_user_id}}">
+            <button type="button" class="btn btn-light">
             Написать сообщение
+            </button>
         </a>
+            {% if not subscribed %}
+        <a href="/subscribe/{{current_user_id}}">
+
+           <button type="button" class="btn btn-light">
+            Подписаться
+           </button>
+        </a>
+            {% else %}
+            <button type="button" class="btn btn-light">
+            Вы подписаны
+           </button>
+            {% endif %}
+
+        </h1>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     {% for item in news %}

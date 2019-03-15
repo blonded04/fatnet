@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    {% for item in news %}
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-dark" role="alert">
+            <h1>
+            <img width="50" style="border-radius: 200px;" src="/static/avas/{{item[3]}}.jpg">{{item[4]}}</h1>
+            <h2>{{item[1]}}</h2>
+            <p class="text-justify">{{item[2]}}</p>
+
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

@@ -34,7 +34,8 @@ class UsersModel:
 
     def exists(self, user_name, password_hash):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE user_name = ? AND password_hash = ?", (user_name, password_hash))
+        cursor.execute("SELECT * FROM users WHERE user_name = ? AND password_hash = ?",
+                       (user_name, password_hash))
         row = cursor.fetchone()
         return (True, row[0]) if row else (False,)
 
@@ -52,6 +53,9 @@ class UsersModel:
 
     def get_hash(self, userid):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE id = ?", (userid))
+        cursor.execute("SELECT * FROM users WHERE id = ?", (userid,))
         row = cursor.fetchone()
         return row[2]
+
+    def get_table_size(self):
+        return len(self.get_all())

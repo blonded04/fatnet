@@ -58,5 +58,3 @@ class MessageModel:
             "SELECT * FROM messages")
         rows = cursor.fetchall()
         return rows
-
-

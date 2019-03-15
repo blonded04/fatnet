@@ -1,24 +1,54 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="row" style="margin-bottom: 20px;">
-    <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-        <a href="/add_news" title="Добавить новость" >
-            <img src="/static/img/blackplus.png" width="30">
-        </a>
-    </div>
-    <div class="col-lg-1 col-md-1 col-xs-1 col-sm-1" style="text-align: right;">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
+        <!--<a href="/add_news">-->
+            <!--<button type="button" class="btn btn-light">-->
+                <!--Добавить новость-->
+            <!--</button>-->
+        <!--</a>-->
         <a href="/messages">
-            <img src="/static/img/message.png" width="35">
+            <button type="button" class="btn btn-light">
+                Сообщения
+            </button>
         </a>
+        <a href="/subscriptions">
+            <button type="button" class="btn btn-light">
+                Новости друзей
+            </button>
+        </a>
+        <a href="/users">
+            <button type="button" class="btn btn-light">
+                Список пользователей
+            </button>
+        </a>
+
+
+        <br>
+        <br>
+        <p>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            {{ form.title }}
+            {{ form.content }}
+            {{ form.submit }}
+        <a href="/add_news">
+            <button type="button" class="btn btn-light">
+                Добавить новость
+            </button>
+        </a>
+        </form>
+
+        </p>
     </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
     {% for item in news %}
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 alert alert-dark" role="alert">
-            <h2>{{item[1]}}</h2>
-            <p class="text-justify">{{item[2]}}</p>
-            <a href="/delete_news/{{item[0]}}">Удалить новость</a>
+            <h1>{{item[1]}}</h1>
+            <p class="text-justify" style="overflow: auto;">{{item[2]}}</p>
+            <a href="/delete_news/{{item[0]}}"><button class="btn btn-dark"> Удалить новость </button></a>
         </div>
     {% endfor %}
     </div>

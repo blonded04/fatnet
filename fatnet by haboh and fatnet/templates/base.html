@@ -15,7 +15,13 @@
             <img src="/static/img/logo.png" width="150">
         </a>
         {% if "username" in session %}
-            <a class="navbar-brand" href="/logout">{{session['username']}}</a>
+          <div class="navbar-brand">
+          <p>{{session['username']}}
+            <a class="" href="/logout">
+                <img style="border-radius: 200px; margin-left: 10px;" src="/static/avas/{{session['user_id']}}.jpg" width="100">
+            </a>
+              </p>
+          </div>
         {% endif %}
       </nav>
 
