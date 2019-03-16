@@ -1,19 +1,13 @@
-import hashlib
-import sqlite3
-from db import DB
-from re import search
-import random
-from users_model import UsersModel
 from db import DB
 
 db = DB()
 
 
 class MessageModel:
-    def __init__(self, connection):
+    def __init__(self, connection):  # connecting to db
         self.connection = connection
 
-    def init_table(self):
+    def init_table(self):  # create table if not exists
         cursor = self.connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS messages 
                                 (
@@ -30,16 +24,17 @@ class MessageModel:
         cursor.execute('''INSERT INTO messages 
                           (sender_id, recipient_id,  message) 
                           VALUES (?,?,?)''', (
-            str(sender_id), str(recipient_id), message))
+            str(sender_id), str(recipient_id),
+            message))  # when send message, only sender_id, recipient_id and message required
         cursor.close()
         self.connection.commit()
 
-    def get_all_between_pair(self, sender_id, recipient_id):  # опять мак
+    def get_all_between_pair(self, sender_id, recipient_id):
         cursor = self.connection.cursor()
         cursor.execute(
             "SELECT * FROM messages WHERE sender_id = ? AND recipient_id = ? OR sender_id = ? AND recipient_id = ?",
             (str(sender_id), str(recipient_id), str(recipient_id), str(
-                sender_id)))  # тут я не уверен, сработает ли ? AND ?, вдруг там можно .format делать только когда (?,?)
+                sender_id)))  # getting all messages between two users, currently unused
         rows = cursor.fetchall()
         return rows
 
@@ -48,7 +43,7 @@ class MessageModel:
         cursor.execute(
             "SELECT * FROM messages WHERE sender_id = ? OR recipient_id = ?",
             (str(sender_id), str(sender_id))
-        )
+        )  # getting all messages for 1 user
         rows = cursor.fetchall()
         return rows
 
@@ -57,4 +52,4 @@ class MessageModel:
         cursor.execute(
             "SELECT * FROM messages")
         rows = cursor.fetchall()
-        return rows
+        return rows  # getting all db
